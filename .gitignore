@@ -1,0 +1,2 @@
+#The private bot information class. This must be made and filled by any users with info such the bot token.
+BotInfo.java

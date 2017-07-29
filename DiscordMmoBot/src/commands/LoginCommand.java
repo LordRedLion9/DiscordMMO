@@ -11,6 +11,11 @@ public class LoginCommand implements Command{
 		
 		String userId = event.getAuthor().getId();
 		
+		if(ServerMain.checkLoggedIn(userId)){
+			ServerMain.botSay("You are already logged in! Use the ~!logout command to log out", event.getChannel());
+			return false;
+		}
+		
 		if (ServerMain.checkRegistered(userId)){
 			return true;
 		}
@@ -25,6 +30,7 @@ public class LoginCommand implements Command{
 		
 		String userId = event.getAuthor().getId();
 		ServerMain.loginUser(userId);
+		ServerMain.botSay("You have logged into the server. Welcome!", event.getChannel());
 		
 	}
 

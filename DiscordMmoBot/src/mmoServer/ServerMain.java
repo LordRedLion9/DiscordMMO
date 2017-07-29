@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.security.auth.login.LoginException;
 
+import commands.*;
 import mmoGame.GameMain;
 import mmoServer.Command;
 import mmoServer.CommandParser;
@@ -38,31 +39,61 @@ public class ServerMain {
 	public void run(){
 		
 		setupJDA();
+		
+		commands.put("register", new RegisterCommand());
+		commands.put("login", new LoginCommand());
+		commands.put("logout", new LogoutCommand());
+		
 		game = new GameMain();
 
 	}
 	
-	public static void loginUser(String name){
+	public static void registerUser(String ID, String name){
 		
-		if (checkRegistered(name)){
+		User newUser = new User(name, ID);
+		registeredUsers.put(ID, newUser);
+		
+		System.out.println("New User created. Name: " + newUser.getName() + " ID: " + newUser.getID());
+		
+	}
+	
+	public static void loginUser(String ID){
+		
+		if (checkRegistered(ID)){
 			
-			User user = registeredUsers.get(name);
-			loggedInUsers.put(name, user);
+			User user = registeredUsers.get(ID);
+			loggedInUsers.put(ID, user);
 
+			System.out.println("User logged in. Name: " + user.getName() + " ID: " + user.getID());
+			
 		}
-		else{
-			
-			
-			
+	}
+	
+	public static void logoutUser(String ID){
+		
+		if (checkLoggedIn(ID)){
+			loggedInUsers.remove(ID);
 		}
 		
 	}
 	
+	public static boolean checkLoggedIn(String ID){
+		
+		for (String s : loggedInUsers.keySet()){
+			if (s.equals(ID)){
+				return true;
+			}
+		}
+		
+		return false; //Is not logged in
+		
+	}
+	
 	//Method to check if user is registered and has User object associated with them
-	public static Boolean checkRegistered(String name){
+	public static Boolean checkRegistered(String ID){
 		
 		for (String s : registeredUsers.keySet()){
-			if (s.equals(name)){
+			if (s.equals(ID)){
 				return true;
 			}
 		}
@@ -104,7 +135,18 @@ public class ServerMain {
 		
 		if (commands.containsKey(cmd.invoke)){
 			
-			//do stuff
+			Command command = commands.get(cmd.invoke);
+			
+			boolean safe = command.isCalled(cmd.args, cmd.event);
+			
+			if (safe){
+				System.out.println("Command is SAFE");
+				command.doAction(cmd.args, cmd.event);
+				command.endCommand(safe, cmd.event);
+			} else {
+				System.out.println("Command is UNSAFE");
+				command.endCommand(safe, cmd.event);
+			}
 			
 		} else{
 			

@@ -28,15 +28,12 @@ public class BotListener extends ListenerAdapter {
 
 		JDA listenerJda = event.getJDA();
 		
-		User author = event.getAuthor();
 		Message message = event.getMessage();
 		MessageChannel channel = event.getChannel();
 		
 		String messageContent = message.getContent();
-		
-		boolean isBot = author.isBot();
-		
-		if (messageContent.startsWith("~!") && !isBot){
+
+		if (messageContent.startsWith("~!") && !event.getAuthor().isBot()){
 			ServerMain.handleCommand(ServerMain.parser.parse(messageContent, event));
 		}
 		

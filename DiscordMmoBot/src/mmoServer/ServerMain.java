@@ -10,6 +10,7 @@ import mmoServer.Command;
 import mmoServer.CommandParser;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 
@@ -137,16 +138,21 @@ public class ServerMain {
 			
 			Command command = commands.get(cmd.invoke);
 			
-			boolean safe = command.isCalled(cmd.args, cmd.event);
+			//check to see if either the user is logged in, or one of the three login commands. This is to save checking in each command whether they are logged in
+			if (cmd.invoke.equals("login") || cmd.invoke.equals("register") || cmd.invoke.equals("logoff") || checkLoggedIn(cmd.event.getAuthor().getId())){				
+				
+				boolean acvtivate = command.isCalled(cmd.args, cmd.event);
+				
+				if (acvtivate){
+					System.out.println("Command is SAFE");
+					command.doAction(cmd.args, cmd.event);
+					command.endCommand(acvtivate, cmd.event);
+				} else {
+					System.out.println("Command is UNSAFE");
+					command.endCommand(acvtivate, cmd.event);
+				}
+			} 
 			
-			if (safe){
-				System.out.println("Command is SAFE");
-				command.doAction(cmd.args, cmd.event);
-				command.endCommand(safe, cmd.event);
-			} else {
-				System.out.println("Command is UNSAFE");
-				command.endCommand(safe, cmd.event);
-			}
 			
 		} else{
 			
@@ -156,6 +162,7 @@ public class ServerMain {
 		}
 		
 	}
+	
 	
 	public static void botTell(String msg, User user){	
 		//private message user with message

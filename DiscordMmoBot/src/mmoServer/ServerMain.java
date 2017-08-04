@@ -6,26 +6,23 @@ import javax.security.auth.login.LoginException;
 
 import commands.*;
 import mmoGame.GameMain;
-import mmoServer.Command;
-import mmoServer.CommandParser;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 
 public class ServerMain {
 
-	public static JDA jda;
+	private static JDA jda;
 	private BotInfo botInfo;
-	
+
 	public static CommandParser parser = new CommandParser(); //The command processing object
-	public static HashMap<String, Command> commands = new HashMap<String, Command>(); //A map of user command strings to relevant command objects <Typed Command, Command>
-	
-	public static HashMap<String, User> registeredUsers = new HashMap<String, User>(); //Registered Users. <User Discord ID Number, User profile object>
-	public static HashMap<String, User> loggedInUsers = new HashMap<String, User>(); //Map of users currently logged in. <User Discord ID Number, User profile object>
-	
-	public GameMain game;
+	private static HashMap<String, Command> commands = new HashMap<String, Command>(); //A map of user command strings to relevant command objects <Typed Command, Command>
+
+	private static HashMap<String, User> registeredUsers = new HashMap<String, User>(); //Registered Users. <User Discord ID Number, User profile object>
+	private static HashMap<String, User> loggedInUsers = new HashMap<String, User>(); //Map of users currently logged in. <User Discord ID Number, User profile object>
+
+	private static GameMain game;
 	Thread gameThread;
 	
 	//MAIN METHOD. STARTS THE PROGRAM (currently starts here in the server)
@@ -45,8 +42,21 @@ public class ServerMain {
 		commands.put("login", new LoginCommand());
 		commands.put("logout", new LogoutCommand());
 		
-		game = new GameMain();
+		startGame();
 
+	}
+	
+	public void startGame(){
+		
+		game = new GameMain();
+		
+		gameThread = new Thread(game);
+		gameThread.start();
+		
+	}
+
+	public static GameMain getGame() {
+		return game;
 	}
 	
 	public static void registerUser(String ID, String name){
@@ -89,6 +99,10 @@ public class ServerMain {
 		return false; //Is not logged in
 		
 	}
+
+	public static User getUser(String ID){
+		return loggedInUsers.get(ID);
+	}
 	
 	//Method to check if user is registered and has User object associated with them
 	public static Boolean checkRegistered(String ID){
@@ -109,7 +123,8 @@ public class ServerMain {
 		
 		try {
 			jda = new JDABuilder(AccountType.BOT)
-					.setToken(BotInfo.botToken)
+					//.setToken(BotInfo.botToken)
+					.setToken("MjQ4NjYzNjY5NDI3MjczNzMw.CxwOTA.gaiXre2CqAHD0T9qK92-3OVib4w")
 					.addEventListener(new BotListener())
 					.setAutoReconnect(true)
 					.setAudioEnabled(true)

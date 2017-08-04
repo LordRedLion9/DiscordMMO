@@ -1,12 +1,25 @@
 package mmoGame;
 
+import mmoServer.User;
+
 public class GameMain implements Runnable{
 	
-	boolean running;
-	boolean playing;
+	boolean running = false;
 	
+	Location spawn;
+
+
 	public void run(){
 		
+		running = true;
+
+		spawn = new Location();
+		spawn.setDesc(
+
+				"The blank white expanse of the testing zone stretches infinitely all around you."
+
+		);
+
 		GameRunner runner = new GameRunner(this);
 		Thread t = new Thread(runner);
 		t.start();
@@ -18,8 +31,16 @@ public class GameMain implements Runnable{
 		
 		//Game tick update stuff here. Things that happen from this should be time based things.
 		
+		
 	}
 	
+	public void createNewChar(User user){
+
+		PlayerCharacter newChar = new PlayerCharacter();
+		newChar.setLocation(spawn);
+		user.setChar(newChar);
+		
+	}
 	
 	
 }
@@ -47,5 +68,6 @@ class GameRunner implements Runnable{
 				lastTime = nowTime;
 			}
 		}
-	}	
+	}
+	
 }

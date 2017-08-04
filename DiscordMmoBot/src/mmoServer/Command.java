@@ -6,8 +6,8 @@ public interface Command {
 
 	    //Method to test for correct usage of the command
 		public boolean isCalled(String[] args, MessageReceivedEvent event);
-		
-		//Main action of the command
+
+	    //Main action of the command
 		public void doAction(String[] args, MessageReceivedEvent event);
 		
 		

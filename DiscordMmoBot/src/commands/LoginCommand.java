@@ -2,6 +2,7 @@ package commands;
 
 import mmoServer.Command;
 import mmoServer.ServerMain;
+import mmoServer.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class LoginCommand implements Command{
@@ -31,7 +32,16 @@ public class LoginCommand implements Command{
 		String userId = event.getAuthor().getId();
 		ServerMain.loginUser(userId);
 		ServerMain.botSay("You have logged into the server. Welcome!", event.getChannel());
-		
+
+		User user = ServerMain.getUser(userId);
+
+		if (user.getChar() == null){
+		    ServerMain.getGame().createNewChar(user);
+        }
+
+		String areaDesc = user.getChar().getLocation().getDescription();
+		ServerMain.botSay(areaDesc, event.getChannel()); //Say description for area
+
 	}
 
 	@Override

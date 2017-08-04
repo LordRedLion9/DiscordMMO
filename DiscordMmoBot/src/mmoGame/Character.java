@@ -10,6 +10,7 @@ public abstract class Character {
 	public String desc;
 	
 	private int health;
+        private int maxHealth = 20; //Placeholder value, will need discussion
 	
 	Location currentLocation;
 	
@@ -38,6 +39,14 @@ public abstract class Character {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+        
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
 	}
 	
 	

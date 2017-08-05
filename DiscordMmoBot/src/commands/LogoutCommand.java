@@ -31,13 +31,13 @@ public class LogoutCommand implements Command {
 
 	@Override
 	public void endCommand(boolean success, MessageReceivedEvent event) {
-		// TODO Auto-generated method stub
+		// nope
 
 	}
 
 	@Override
 	public String help() {
-		// TODO Auto-generated method stub
+		// TODO Fill in Logout command help
 		return null;
 	}
 

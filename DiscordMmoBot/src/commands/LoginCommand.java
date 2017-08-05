@@ -46,7 +46,7 @@ public class LoginCommand implements Command{
 
 	@Override
 	public void endCommand(boolean success, MessageReceivedEvent event) {
-		// TODO Auto-generated method stub
+		// nope
 		
 	}
 

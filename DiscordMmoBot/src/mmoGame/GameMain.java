@@ -33,14 +33,32 @@ public class GameMain implements Runnable{
 		
 		
 	}
-	
+
+	//OTHER METHODS
+
+	public void teleportChar(Character c, Location l){
+
+		//straight up change of location
+		//remove char from current loc
+		//set Chars location to l
+		//add char to l
+
+	}
+
 	public void createNewChar(User user){
 
 		PlayerCharacter newChar = new PlayerCharacter();
-		newChar.setLocation(spawn);
+		newChar.setName(user.getName()); //temp name, user can change later
 		user.setChar(newChar);
+
+		newChar.setLocation(spawn);
+		spawn.addChar(newChar);
 		
 	}
+
+	public void spawnItem(Item i, Location l){
+	    l.addItem(i);
+    }
 	
 	
 }

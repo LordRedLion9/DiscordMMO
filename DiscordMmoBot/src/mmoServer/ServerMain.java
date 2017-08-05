@@ -41,7 +41,10 @@ public class ServerMain {
 		commands.put("register", new RegisterCommand());
 		commands.put("login", new LoginCommand());
 		commands.put("logout", new LogoutCommand());
-		
+
+		commands.put("look", new LookCommand());
+		commands.put("spawn", new SpawnThingCommand());
+
 		startGame();
 
 	}

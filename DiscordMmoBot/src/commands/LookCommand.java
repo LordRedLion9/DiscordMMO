@@ -38,19 +38,24 @@ public class LookCommand implements Command {
 
         String itemMsg = "fuk";
 
-        if (items.size() == 0){
+        if (items.size() < 1){
 
             itemMsg = "There are no items here.";
 
-        }else if (items.size() >= 0){
+        }else {
+            
+        ServerMain.botSay("There are " + items.size() + " items", event.getChannel());
 
-            for (int i = 0; i < items.size() - 1; i++) {
-
+            for (int i = 0; i < items.size(); i++) {
+                
                 if (i == 0) {
+                    ServerMain.botSay("Start", event.getChannel());
                     itemMsg = "There is a " + items.get(i).getItemName();
                 } else if (i == items.size() - 1){
+                    ServerMain.botSay("End", event.getChannel());
                     itemMsg += items.get(i).getItemName() + " on the ground here.";
                 } else {
+                    ServerMain.botSay("Item", event.getChannel());
                     itemMsg += ", " + items.get(i).getItemName();
                 }
             }

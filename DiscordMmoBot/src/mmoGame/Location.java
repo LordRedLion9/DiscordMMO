@@ -23,6 +23,10 @@ public class Location {
 	}
 
 	public void addItem(Item i){items.add(i);}
+
+	public List<Item> getAllItems(){
+	    return items;
+    }
 	
 	public void setDesc(String desc){
 		description = desc;

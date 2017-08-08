@@ -41,7 +41,7 @@ public class SpawnItem implements Command {
 
         }else if (args[0].toLowerCase().equals("weapon")){
 
-            newItem = new Weapon(args[0], Integer.parseInt(args[1]), args[2]);
+            newItem = new Weapon(args[1], Integer.parseInt(args[2]), args[3]);
 
         }else{
 

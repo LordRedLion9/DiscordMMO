@@ -43,7 +43,7 @@ public class ServerMain {
 		commands.put("logout", new LogoutCommand());
 
 		commands.put("look", new LookCommand());
-		commands.put("spawn", new SpawnThingCommand());
+		commands.put("spawn", new SpawnItem());
 
 		startGame();
 

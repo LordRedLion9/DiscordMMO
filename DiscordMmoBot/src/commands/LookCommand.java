@@ -36,7 +36,7 @@ public class LookCommand implements Command {
 
         List<Item> items = ServerMain.getUser(userID).getChar().getLocation().getAllItems();
 
-        String itemMsg = "fuk";
+        String itemMsg;
 
         if (items.size() < 1){
 
@@ -46,19 +46,14 @@ public class LookCommand implements Command {
             
         ServerMain.botSay("There are " + items.size() + " items", event.getChannel());
 
+            itemMsg = "There is a ";
             for (int i = 0; i < items.size(); i++) {
-                
-                if (i == 0) {
-                    ServerMain.botSay("Start", event.getChannel());
-                    itemMsg = "There is a " + items.get(i).getItemName();
-                } else if (i == items.size() - 1){
-                    ServerMain.botSay("End", event.getChannel());
-                    itemMsg += items.get(i).getItemName() + " on the ground here.";
-                } else {
-                    ServerMain.botSay("Item", event.getChannel());
-                    itemMsg += ", " + items.get(i).getItemName();
-                }
+
+                itemMsg += items.get(i).getItemName();
+                if (i < items.size()-1){itemMsg += ", ";}
+
             }
+            itemMsg += " on the ground here.";
         }
 
         ServerMain.botSay(itemMsg, event.getChannel());

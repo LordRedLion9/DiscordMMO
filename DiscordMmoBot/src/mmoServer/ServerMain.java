@@ -175,7 +175,7 @@ public class ServerMain {
 		} else{
 			
 			System.out.println("Invalid command");
-			botSay("You Fail", cmd.event.getChannel());
+			botSay("Invalid Command", cmd.event.getChannel());
 			
 		}
 		

@@ -30,7 +30,7 @@ public class SpawnItem implements Command {
 
 
         String userID = event.getAuthor().getId();
-        PlayerCharacter playerC = ServerMain.getUser( userID ).getChar(); //This is lazy
+        PlayerCharacter playerC = ServerMain.getUser( userID ).getChar(); //This is lazy (it's exactly how I did mine)
 
         Item newItem = null;
 
@@ -50,7 +50,7 @@ public class SpawnItem implements Command {
         }
 
         if (newItem != null) {
-            ServerMain.botSay(playerC.getName() + " snaps his fingers, and a " + newItem.getItemName() + " appears here", event.getChannel());
+            ServerMain.botSay(playerC.getName() + " snaps their fingers, and a " + newItem.getItemName() + " appears.", event.getChannel());
             playerC.getLocation().addItem(newItem);
         }
 

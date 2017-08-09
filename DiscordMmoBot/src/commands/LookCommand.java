@@ -44,13 +44,15 @@ public class LookCommand implements Command {
 
         }else {
             
-        ServerMain.botSay("There are " + items.size() + " items", event.getChannel());
 
             itemMsg = "There is a ";
             for (int i = 0; i < items.size(); i++) {
+                
+                if (i == items.size()){itemMsg += " and a ";} //If it's the last item
 
                 itemMsg += items.get(i).getItemName();
-                if (i < items.size()-1){itemMsg += ", ";}
+                
+                if (i < items.size()-1){itemMsg += ", ";} //If it's not the last item
 
             }
             itemMsg += " on the ground here.";

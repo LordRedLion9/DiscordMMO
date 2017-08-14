@@ -13,8 +13,7 @@ public class RegisterCommand implements Command {
 		
 		if (!ServerMain.checkRegistered(ID)){
 			return true;
-		}
-		else{
+		} else {
 			ServerMain.botSay("You are alredy registered. Please use the ~!login command to log in", event.getChannel());
 			return false;
 		}
@@ -28,14 +27,16 @@ public class RegisterCommand implements Command {
 		String name = event.getAuthor().getName();
 		
 		ServerMain.registerUser(ID, name);
-		ServerMain.botSay("Great! You are now registered. Please use the ~!login command to log in", event.getChannel());
+                
+		ServerMain.botSay("Great! You are now registered. In future, use the ~!login command to log in.", event.getChannel());
+                
+                ServerMain.handleCommand(ServerMain.parser.parse("~!login", event)); //Janky asf, but it should work for now
+            
 		
 	}
 
 	@Override
 	public void endCommand(boolean success, MessageReceivedEvent event) {
-
-
 	}
 
 	@Override

@@ -28,8 +28,8 @@ public class CommandParser {
 				if (arg.charAt(arg.length() - 1) == '\"'){ //String arg ends
 					parsingString = false;
 					toAdd += arg;
-					rawArgs.add(toAdd);
-					System.out.println("Added string: " + toAdd + ": as an argument");
+					rawArgs.add(toAdd.replace("\"", "").trim());
+					System.out.println("Added string: \"" + toAdd.replace("\"", "") + "\" as an argument");
 					toAdd = "";
 				} else {
 					toAdd += arg + " ";
@@ -37,9 +37,15 @@ public class CommandParser {
 
 			} else { //Not part of a string arg
 
-				if (arg.charAt(0) == '\"'){ //String arg begins
+				if (arg.startsWith("\"")){ //String arg begins
 					parsingString = true;
 					toAdd += arg + " ";
+                                        if (arg.endsWith("\"")){
+                                            rawArgs.add(toAdd.replace("\"", "").trim());
+                                            System.out.println("Added string: \"" + toAdd.replace("\"", "").trim() + "\" as an argument");
+                                            toAdd = "";
+                                            parsingString = false;
+                                        }
 				} else {
 					rawArgs.add(arg);
 					System.out.println("Added " + arg + " to list of args");

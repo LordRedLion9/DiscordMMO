@@ -33,7 +33,9 @@ public class BotListener extends ListenerAdapter {
 		
 		String messageContent = message.getContent();
 
-		if (messageContent.startsWith("~!") && !event.getAuthor().isBot()){
+		if (event.getAuthor().isBot() & !event.getAuthor().getName().equals("ZBot")){
+                    //do nothing
+                } else if (messageContent.startsWith("~!")) {
 			ServerMain.handleCommand(ServerMain.parser.parse(messageContent, event));
 		}
 		

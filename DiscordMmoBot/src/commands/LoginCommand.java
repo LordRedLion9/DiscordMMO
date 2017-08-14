@@ -34,13 +34,13 @@ public class LoginCommand implements Command{
 		ServerMain.botSay("You have logged into the server. Welcome!", event.getChannel());
 
 		User user = ServerMain.getUser(userId);
-
-		if (user.getChar() == null){
-		    ServerMain.getGame().createNewChar(user);
-        }
-
-		String areaDesc = user.getChar().getLocation().getDescription();
-		ServerMain.botSay(areaDesc, event.getChannel()); //Say description for area
+                
+                if (user.getChar() == null) {
+                    ServerMain.botSay("You don't have a character yet! Create one with ~!createchar", event.getChannel());
+                } else {
+                    String areaDesc = user.getChar().getLocation().getDescription();
+                    ServerMain.botSay(areaDesc, event.getChannel()); //Say description for area
+                }
 
 	}
 

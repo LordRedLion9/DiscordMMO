@@ -3,12 +3,12 @@ package mmoGame;
 public class Weapon extends Item{
 
     int damage;
-    String weaponType; //TODO: switch to enum later
+    String weaponType; //TODO: switch to enum later (Put it in Constants.java)
 
-    public Weapon(String name, int initDamage, String type){
+    public Weapon(String name, int damage, String type){
         super(name);
 
-        damage = initDamage;
+        this.damage = damage;
         weaponType = type;
 
     }

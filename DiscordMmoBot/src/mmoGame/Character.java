@@ -1,27 +1,34 @@
 package mmoGame;
 
 import java.util.*;
+import mmoServer.ServerMain;
 
 //@SuppressWarnings("unused")
-public abstract class Character {
+public abstract class Character implements Inspectable{
 
 	
-	private String name;
-	public String desc;
+	private String name = "generic name";
+	public String desc = "generic description";
+        private String sex;
 	
 	private int health;
         private int maxHealth = 20; //Placeholder value, will need discussion
         
         private int exp = 0;
         
-        private HashMap<String, Integer> attributes = new HashMap<String, Integer>();
-        private HashMap<String, Integer> skills = new HashMap<String, Integer>();
+        private HashMap<String, Integer> attributes = new HashMap<>();
+        private HashMap<String, Integer> skills = new HashMap<>();
 	
 	Location currentLocation;
 	
-	private List<String> inventory = new ArrayList<String>(); //String list only temp, will make item objects later
+	private List<String> inventory = new ArrayList<>(); //String list only temp, will make item objects later
 
-        public Character(){
+        public Character(String name, String sex){
+            
+            this.name = name;
+            
+            this.sex = sex;
+            
             attributes.put("str", 10); //Melee damage
             attributes.put("dex", 10); //To hit
             attributes.put("con", 10); //Hp
@@ -89,6 +96,18 @@ public abstract class Character {
         }
         public int getExp(){
             return this.exp;
+        }
+        public String getSex(){
+            return this.sex;
+        }
+        
+        public String getInfo(){
+            String message = "";
+            message = "```md\n"
+                    + "########## Inspecting " + this.getName() +" ##########\n"
+                    + "\n" + this.desc
+                    + "```";
+            return message;
         }
 	
 	

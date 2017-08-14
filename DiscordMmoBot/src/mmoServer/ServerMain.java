@@ -42,8 +42,12 @@ public class ServerMain {
 		commands.put("login", new LoginCommand());
 		commands.put("logout", new LogoutCommand());
 
+                commands.put("createchar", new CreateCharacterCommand());
 		commands.put("look", new LookCommand());
+                commands.put("inspect", new InspectCommand());
 		commands.put("spawn", new SpawnItem());
+                
+                commands.put("admininfo", new AdminInfoCommand());
 
 		startGame();
 
@@ -65,6 +69,7 @@ public class ServerMain {
 	public static void registerUser(String ID, String name){
 		
 		User newUser = new User(name, ID);
+                
 		registeredUsers.put(ID, newUser);
 		
 		System.out.println("New User created. Name: " + newUser.getName() + " ID: " + newUser.getID());
@@ -159,16 +164,17 @@ public class ServerMain {
 			//check to see if either the user is logged in, or one of the three login commands. This is to save checking in each command whether they are logged in
 			if (cmd.invoke.equals("login") || cmd.invoke.equals("register") || cmd.invoke.equals("logoff") || checkLoggedIn(cmd.event.getAuthor().getId())){				
 				
-				boolean acvtivate = command.isCalled(cmd.args, cmd.event);
+				boolean activate = command.isCalled(cmd.args, cmd.event);
 				
-				if (acvtivate){
+				if (activate){
 					System.out.println("Command is SAFE");
 					command.doAction(cmd.args, cmd.event);
-					command.endCommand(acvtivate, cmd.event);
+					command.endCommand(activate, cmd.event);
 				} else {
 					System.out.println("Command is UNSAFE");
-					command.endCommand(acvtivate, cmd.event);
+					command.endCommand(activate, cmd.event);
 				}
+                                
 			} 
 			
 			

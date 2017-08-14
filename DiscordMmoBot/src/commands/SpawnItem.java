@@ -31,17 +31,27 @@ public class SpawnItem implements Command {
 
         String userID = event.getAuthor().getId();
         PlayerCharacter playerC = ServerMain.getUser( userID ).getChar(); //This is lazy (it's exactly how I did mine)
+        String pronoun = (playerC.getSex().equals("male")) ? "his" : "her";
+        String message = "";
 
         Item newItem = null;
 
         if (args[0].toLowerCase().equals("item")){
 
             newItem = new Item(args[1]);
+            
+            if (args.length == 3) {
+                newItem.setDesc(args[2]);
+            }
 
 
         }else if (args[0].toLowerCase().equals("weapon")){
 
             newItem = new Weapon(args[1], Integer.parseInt(args[2]), args[3]);
+            
+            if (args.length == 5) {
+                newItem.setDesc(args[4]);
+            }
 
         }else{
 
@@ -50,7 +60,24 @@ public class SpawnItem implements Command {
         }
 
         if (newItem != null) {
-            ServerMain.botSay(playerC.getName() + " snaps their fingers, and a " + newItem.getItemName() + " appears.", event.getChannel());
+            message += playerC.getName() + " snaps " + pronoun + " fingers, and";
+            
+                switch (String.valueOf(newItem.getItemName().charAt(0)).toLowerCase()) {
+                    case "a":
+                    case "e":
+                    case "i":
+                    case "o":
+                    case "u":
+                        message += " an ";
+                        break;
+                    default:
+                        message += " a ";
+                        break;
+                }
+            message += newItem.getItemName() + " appears.";
+                
+            ServerMain.botSay(message, event.getChannel());
+            newItem.setLocation(playerC.getLocation());
             playerC.getLocation().addItem(newItem);
         }
 

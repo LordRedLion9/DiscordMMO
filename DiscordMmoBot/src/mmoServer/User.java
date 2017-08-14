@@ -7,6 +7,7 @@ public class User {
     private String name;
     private String ID;
     private boolean loggedIn;
+    private boolean admin;
 
 
     PlayerCharacter playerChar = null;
@@ -15,6 +16,11 @@ public class User {
 
         this.name = name;
         this.ID = ID;
+        for (String s : Constants.Admins) {
+            if (s.equals(ID)) {
+                this.admin = true;
+            }
+        }
 
     }
 
@@ -44,6 +50,14 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.admin = isAdmin;
     }
 
 }

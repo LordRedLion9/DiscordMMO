@@ -127,22 +127,19 @@ public class Location {
 
 
 
-            for (int i = 0;i < NPCs.size() - 1; i++){
+            for (int i = 0;i < NPCs.size(); i++){
 
                 String npcName = NPCs.get(i).getName();
 
-                if (i < NPCs.size()-1) {
-                    message += npcName + " and ";
-                } else {
+                if (i == NPCs.size() - 1) {
                     message += npcName;
+                } else {
+                    message += npcName + " and ";
                 }
-
-
-
 
             }
 
-            message += " is / are standing here.";
+            message += " is standing here.";
         }
 
 

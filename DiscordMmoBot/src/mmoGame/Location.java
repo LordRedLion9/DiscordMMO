@@ -9,18 +9,20 @@ public class Location {
     List<PlayerCharacter> Players = new ArrayList<>();
     List<NPC> NPCs = new ArrayList<>();
 
-    List<Location> Exits = new ArrayList<Location>(); // may change this to map
+    List<Location> Exits = new ArrayList<>(); // may change this to map
 
-    List<Item> Items = new ArrayList<Item>();
+    List<Item> Items = new ArrayList<>();
 
     private String name = "generic area";
+
+    private static int locIdNum = 0;
     private String locationID;
 
-    String description = "This area is an empty white expanse stretching for endless miles and miles";
+    private String description = "This area is an empty white expanse stretching for endless miles and miles";
 
     public Location() {
-        this.locationID = "L" + (ServerMain.getGame().Locations.size() + 1);
-        ServerMain.getGame().Locations.add(this);
+        this.locationID = "L" + (++locIdNum);
+        GameMain.Locations.add(this);
     }
 
     public void update(){

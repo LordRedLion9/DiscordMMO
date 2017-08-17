@@ -17,13 +17,13 @@ public class ServerMain {
     private BotInfo botInfo;
 
     public static CommandParser parser = new CommandParser(); //The command processing object
-    private static HashMap<String, Command> commands = new HashMap<String, Command>(); //A map of user command strings to relevant command objects <Typed Command, Command>
+    private static HashMap<String, Command> commands = new HashMap<>(); //A map of user command strings to relevant command objects <Typed Command, Command>
 
-    private static HashMap<String, User> registeredUsers = new HashMap<String, User>(); //Registered Users. <User Discord ID Number, User profile object>
-    private static HashMap<String, User> loggedInUsers = new HashMap<String, User>(); //Map of users currently logged in. <User Discord ID Number, User profile object>
+    private static HashMap<String, User> registeredUsers = new HashMap<>(); //Registered Users. <User Discord ID Number, User profile object>
+    private static HashMap<String, User> loggedInUsers = new HashMap<>(); //Map of users currently logged in. <User Discord ID Number, User profile object>
 
     private static GameMain game;
-    Thread gameThread;
+    private Thread gameThread;
 
     //MAIN METHOD. STARTS THE PROGRAM (currently starts here in the server)
     public static void main(String[] args) {

@@ -7,12 +7,12 @@ import mmoServer.User;
 
 public class GameMain implements Runnable {
 
-    boolean running = false;
+    private boolean running = false;
 
-    public static ArrayList<PlayerCharacter> Players = new ArrayList(); //List of ALL the Players currently spawned in the game
-    public static ArrayList<NPC> NPCs = new ArrayList(); //List of ALL the NPCs currently spawned in the game
-    public static ArrayList<Item> Items = new ArrayList(); //List of ALL the items currently spawned in the game
-    public static ArrayList<Location> Locations = new ArrayList(); //List of ALL the locations in the game
+    public static ArrayList<PlayerCharacter> Players = new ArrayList<>(); //List of ALL the Players currently spawned in the game
+    public static ArrayList<NPC> NPCs = new ArrayList<>(); //List of ALL the NPCs currently spawned in the game
+    public static ArrayList<Item> Items = new ArrayList<>(); //List of ALL the items currently spawned in the game
+    public static ArrayList<Location> Locations = new ArrayList<>(); //List of ALL the locations in the game
 
     Location spawn;
 
@@ -35,13 +35,11 @@ public class GameMain implements Runnable {
 
 
     public void gameUpdate() {
-
         //Game tick update stuff here. Things that happen from this should be time based things.
 
         for (Location l : Locations){
             l.update();
         }
-
     }
 
     //OTHER METHODS
@@ -71,7 +69,7 @@ public class GameMain implements Runnable {
         l.addItem(i);
     }
 
-    public Inspectable getInspectable(Location loc, String input) {
+    private Inspectable getInspectable(Location loc, String input) {
         Inspectable result = null;
         String name = input.toLowerCase().trim();
         for (PlayerCharacter pc : loc.Players) {
@@ -112,30 +110,30 @@ public class GameMain implements Runnable {
 
         message += "### Displaying game info: ###\n";
 
-        if (!this.Players.isEmpty()) {
+        if (!Players.isEmpty()) {
             message += "\n<Players>:";
-            for (PlayerCharacter p : this.Players) {
+            for (PlayerCharacter p : Players) {
                 message += "\n(ID:" + p.getPlayerID() + ")[" + p.getName() + "] is in " + p.getLocation().getName();
             }
             message += "\n";
         }
-        if (!this.NPCs.isEmpty()) {
+        if (!NPCs.isEmpty()) {
             message += "\n<NPCs>:";
-            for (NPC npc : this.NPCs) {
+            for (NPC npc : NPCs) {
                 message += "\n(ID:" + npc.getNPCID() + ")[" + npc.getName() + "] is in " + npc.getLocation().getName();
             }
             message += "\n";
         }
-        if (!this.Items.isEmpty()) {
+        if (!Items.isEmpty()) {
             message += "\n<NPCs>:";
-            for (Item item : this.Items) {
+            for (Item item : Items) {
                 message += "\n(ID:" + item.getItemID() + ")[" + item.getItemName() + "] is in " + item.getLocation().getName();
             }
             message += "\n";
         }
-        if (!this.Locations.isEmpty()) {
+        if (!Locations.isEmpty()) {
             message += "\n<Locations>:";
-            for (Location loc : this.Locations) {
+            for (Location loc : Locations) {
                 message += "\n(ID:" + loc.getLocationID() + ")[" + loc.getName() + "]";
             }
             message += "\n";
@@ -149,10 +147,12 @@ public class GameMain implements Runnable {
 
 class GameRunner implements Runnable {
 
-    GameMain main;
+    private GameMain main;
+    private boolean isRunning = false;
 
     public GameRunner(GameMain gameMain) {
         main = gameMain;
+        isRunning = true;
     }
 
     @Override
@@ -160,7 +160,7 @@ class GameRunner implements Runnable {
 
         long lastTime = System.currentTimeMillis();
 
-        while (true) {
+        do{
             long nowTime = System.currentTimeMillis();
             long unprocessedTicks = (nowTime - lastTime) / 1000; //One unprocessed tick for every second
 
@@ -169,7 +169,7 @@ class GameRunner implements Runnable {
                 unprocessedTicks = 0;
                 lastTime = nowTime;
             }
-        }
+        }while(isRunning);
     }
 
 }

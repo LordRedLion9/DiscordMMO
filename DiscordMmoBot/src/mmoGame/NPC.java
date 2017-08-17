@@ -15,10 +15,10 @@ import java.util.*;
 public class NPC extends Character{
     
     private String NPCID;
-    private static int ID = 0;
+    private static int ID = 0; //Thought having an incrementing ID number would be a bit better.
 
     //list of behaviours object (use anonymous implementations?)
-    //on update can iterate through list of behaviours, checking time? if time is correct then activate the behaviour (methods inside behaviour)
+    //update can iterate through list of behaviours, running checkActive() to see if it will activate (such as a timer) then activate the behaviour (activate())
 
     //Might have separate lists for behaviours that rely on time, and ones that don't (such as behaviours triggered by a player?)
     List<NPCBehaviour> behaviours = new ArrayList<>();
@@ -26,7 +26,7 @@ public class NPC extends Character{
     public NPC(String name, String sex) {
         super(name, sex);
         NPCID = name + (++ID);
-        ServerMain.getGame().NPCs.add(this);
+        GameMain.NPCs.add(this);
 
         behaviours.add(new NPCBehaviour() { //add generic behaviour for testing
             int timer = 0;
@@ -59,9 +59,6 @@ public class NPC extends Character{
 
     public String getNPCID() {
         return NPCID;
-    }
-    public void setNPCID(String charID) {
-        this.NPCID = charID;
     }
 
     /*

@@ -1,29 +1,23 @@
 package mmoGame;
 
-import mmoServer.ServerMain;
-
 public class Item implements Inspectable{
 
     private String itemName;
+
+    private static int idNum = 0;
     private String itemID;
     private String desc = "A generic, grey cube. The most simple form of item. Wonderful.";
-    private Location location;
-
+    private Location location; //Items keeping ref to location is perhaps unnecessarily coupled? If its just for admin info, this may need a workaround? #Opinions
 
 
     public Item(String name){
         itemName = name;
-        itemID = "I" + (ServerMain.getGame().Items.size() + 1);
-        ServerMain.getGame().Items.add(this);
+        itemID = "I" + (++idNum);
+        GameMain.Items.add(this);
     }
 
     public String getItemName() {
         return itemName;
-    }
-
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
     }
 
     public String getDesc() {
@@ -47,10 +41,6 @@ public class Item implements Inspectable{
 
     public String getItemID() {
         return itemID;
-    }
-
-    public void setItemID(String itemID) {
-        this.itemID = itemID;
     }
 
     public Location getLocation() {

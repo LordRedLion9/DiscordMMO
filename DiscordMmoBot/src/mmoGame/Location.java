@@ -23,6 +23,14 @@ public class Location {
         ServerMain.getGame().Locations.add(this);
     }
 
+    public void update(){
+
+        for (NPC npc : NPCs){
+            npc.update();
+        }
+
+    }
+
     public void addChar(PlayerCharacter c) {
         Players.add(c);
     }
@@ -75,7 +83,7 @@ public class Location {
         this.name = name;
     }
 
-    public String getInfo() {
+    public String getInfo() { //TODO: Eventually refactor the shite out of this. Maybe. Dunno if I can be bothered.
         String message = "```md\n";
 
         message += "########## Looking around ###########\n";
@@ -125,8 +133,6 @@ public class Location {
 
         if (!NPCs.isEmpty()){
 
-
-
             for (int i = 0;i < NPCs.size(); i++){
 
                 String npcName = NPCs.get(i).getName();
@@ -142,9 +148,7 @@ public class Location {
             message += " is standing here.";
         }
 
-
         message += "```";
         return message;
     }
-
 }

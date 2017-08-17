@@ -38,6 +38,9 @@ public class GameMain implements Runnable {
 
         //Game tick update stuff here. Things that happen from this should be time based things.
 
+        for (Location l : Locations){
+            l.update();
+        }
 
     }
 

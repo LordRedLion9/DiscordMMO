@@ -32,7 +32,7 @@ public class LookCommand implements Command {
         
         String userID = event.getAuthor().getId();
 
-        ServerMain.botSay(ServerMain.getUser(userID).getChar().getLocation().getInfo(), event.getChannel());
+        ServerMain.botSay(ServerMain.getUser(userID).getChar().getLocation().getInfo(), event.getChannel()); //maybe too coupled?
 
     }
 

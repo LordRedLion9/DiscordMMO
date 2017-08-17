@@ -14,10 +14,11 @@ import mmoServer.ServerMain;
 public class NPC extends Character{
     
     private String NPCID;
+    private static int ID = 0;
     
     public NPC(String name, String sex) {
         super(name, sex);
-        setNPCID("NPC" + (ServerMain.getGame().NPCs.size() + 1));
+        NPCID = name + (++ID);
         ServerMain.getGame().NPCs.add(this);
     }
 

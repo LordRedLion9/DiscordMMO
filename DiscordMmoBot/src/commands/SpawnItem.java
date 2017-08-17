@@ -15,8 +15,12 @@ public class SpawnItem implements Command {
 
         String userID = event.getAuthor().getId();
 
-        if (!ServerMain.checkLoggedIn(userID)){return false;}
-        if (ServerMain.getUser(userID).getChar() == null){return false;}
+        if (!ServerMain.checkLoggedIn(userID)) {
+            return false;
+        }
+        if (ServerMain.getUser(userID).getChar() == null) {
+            return false;
+        }
 
         if (args.length < 2) {
             ServerMain.botSay("Error: incorrect number of args. USAGE: ~!spawn (ITEM | WEAPON) name", event.getChannel());
@@ -30,52 +34,57 @@ public class SpawnItem implements Command {
 
 
         String userID = event.getAuthor().getId();
-        PlayerCharacter playerC = ServerMain.getUser( userID ).getChar(); //This is lazy (it's exactly how I did mine)
+        PlayerCharacter playerC = ServerMain.getUser(userID).getChar(); //This is lazy (it's exactly how I did mine)
         String pronoun = (playerC.getSex().equals("male")) ? "his" : "her";
         String message = "";
 
         Item newItem = null;
 
-        if (args[0].toLowerCase().equals("item")){
+        String spawnCommand = args[0].toLowerCase();
+        switch (spawnCommand) {
+            case "item":
+                newItem = new Item(args[1]);
 
-            newItem = new Item(args[1]);
-            
-            if (args.length == 3) {
-                newItem.setDesc(args[2]);
-            }
+                if (args.length == 3) {
+                    newItem.setDesc(args[2]);
+                }
+                break;
+
+            case "weapon":
+
+                newItem = new Weapon(args[1], Integer.parseInt(args[2]), args[3]);
+
+                if (args.length == 5) {
+                    newItem.setDesc(args[4]);
+                }
+                break;
 
 
-        }else if (args[0].toLowerCase().equals("weapon")){
+            default:
 
-            newItem = new Weapon(args[1], Integer.parseInt(args[2]), args[3]);
-            
-            if (args.length == 5) {
-                newItem.setDesc(args[4]);
-            }
 
-        }else{
-
-            ServerMain.botSay("Invalid item type. ITEM or WEAPON", event.getChannel());
-            ServerMain.botSay("Item type received was: " + args[0], event.getChannel());
+                ServerMain.botSay("Invalid item type. ITEM or WEAPON", event.getChannel());
+                ServerMain.botSay("Item type received was: " + args[0], event.getChannel());
+                return;
         }
 
         if (newItem != null) {
             message += playerC.getName() + " snaps " + pronoun + " fingers, and";
-            
-                switch (String.valueOf(newItem.getItemName().charAt(0)).toLowerCase()) {
-                    case "a":
-                    case "e":
-                    case "i":
-                    case "o":
-                    case "u":
-                        message += " an ";
-                        break;
-                    default:
-                        message += " a ";
-                        break;
-                }
+
+            switch (String.valueOf(newItem.getItemName().charAt(0)).toLowerCase()) {
+                case "a":
+                case "e":
+                case "i":
+                case "o":
+                case "u":
+                    message += " an ";
+                    break;
+                default:
+                    message += " a ";
+                    break;
+            }
             message += newItem.getItemName() + " appears.";
-                
+
             ServerMain.botSay(message, event.getChannel());
             newItem.setLocation(playerC.getLocation());
             playerC.getLocation().addItem(newItem);

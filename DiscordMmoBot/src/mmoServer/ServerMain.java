@@ -1,5 +1,6 @@
 package mmoServer;
 
+import commands.Command;
 import java.util.*;
 
 import javax.security.auth.login.LoginException;
@@ -8,13 +9,16 @@ import commands.*;
 import mmoGame.GameMain;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 
-public class ServerMain {
+public class ServerMain implements java.io.Serializable{
 
     private static JDA jda;
     private BotInfo botInfo;
+    
+    static GameSaver saver;
 
     public static CommandParser parser = new CommandParser(); //The command processing object
     private static HashMap<String, Command> commands = new HashMap<>(); //A map of user command strings to relevant command objects <Typed Command, Command>
@@ -25,11 +29,7 @@ public class ServerMain {
     private static GameMain game;
     private Thread gameThread;
 
-    //MAIN METHOD. STARTS THE PROGRAM (currently starts here in the server)
-    public static void main(String[] args) {
-        ServerMain s = new ServerMain();
-        s.run();
-    }
+    
 
     /***
      * Sets up the JDA and starts the server running
@@ -45,10 +45,12 @@ public class ServerMain {
         commands.put("createchar", new CreateCharacterCommand());
         commands.put("look", new LookCommand());
         commands.put("inspect", new InspectCommand());
-        commands.put("spawn", new SpawnItem());
+        commands.put("spawn", new SpawnItemCommand());
 
         commands.put("admininfo", new AdminInfoCommand());
         commands.put("spawnnpc", new SpawnNPCCommand());
+        
+        commands.put("stop", new StopServerCommand());
 
         startGame();
 
@@ -200,6 +202,16 @@ public class ServerMain {
 
     public static void log(String msg) {
         System.out.println(msg);
+    }
+    
+    public static boolean isAdmin(MessageReceivedEvent event){
+        User user = ServerMain.getUser(event.getAuthor().getId());
+        
+        if (user.isAdmin()) {
+            return true;
+        }
+        return false;
+        
     }
 
 }

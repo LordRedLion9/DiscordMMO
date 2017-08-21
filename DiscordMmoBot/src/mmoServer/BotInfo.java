@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Scanner;
 
-public class BotInfo {
+public class BotInfo implements java.io.Serializable{
 
 	public static String botToken;
 	

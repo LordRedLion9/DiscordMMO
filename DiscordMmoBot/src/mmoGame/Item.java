@@ -1,6 +1,6 @@
 package mmoGame;
 
-public class Item implements Inspectable{
+public class Item implements Inspectable, java.io.Serializable{
 
     private String itemName;
 

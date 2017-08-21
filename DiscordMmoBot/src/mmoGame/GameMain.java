@@ -145,10 +145,10 @@ public class GameMain implements Runnable {
 
 }
 
-class GameRunner implements Runnable {
+class GameRunner implements Runnable, java.io.Serializable {
 
     private GameMain main;
-    private boolean isRunning = false;
+    public boolean isRunning = false;
 
     public GameRunner(GameMain gameMain) {
         main = gameMain;

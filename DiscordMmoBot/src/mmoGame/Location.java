@@ -4,7 +4,7 @@ import java.util.*;
 
 import mmoServer.ServerMain;
 
-public class Location {
+public class Location implements java.io.Serializable{
 
     List<PlayerCharacter> Players = new ArrayList<>();
     List<NPC> NPCs = new ArrayList<>();

@@ -2,13 +2,12 @@ package commands;
 
 import com.sun.security.ntlm.Server;
 import mmoGame.Weapon;
-import mmoServer.Command;
 import mmoServer.ServerMain;
 import mmoGame.Item;
 import mmoGame.PlayerCharacter;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class SpawnItem implements Command {
+public class SpawnItemCommand implements Command {
 
     @Override
     public boolean isCalled(String[] args, MessageReceivedEvent event) {

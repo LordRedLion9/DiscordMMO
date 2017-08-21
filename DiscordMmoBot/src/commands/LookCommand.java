@@ -2,7 +2,6 @@ package commands;
 
 import java.util.*;
 
-import mmoServer.Command;
 import mmoServer.ServerMain;
 import mmoGame.Item;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

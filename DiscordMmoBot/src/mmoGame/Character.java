@@ -4,7 +4,7 @@ import java.util.*;
 import mmoServer.ServerMain;
 
 //@SuppressWarnings("unused")
-public abstract class Character implements Inspectable{
+public abstract class Character implements Inspectable, java.io.Serializable{
 
 	
 	private String name = "generic name";

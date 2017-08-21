@@ -32,10 +32,17 @@ public class BotListener extends ListenerAdapter {
 		MessageChannel channel = event.getChannel();
 		
 		String messageContent = message.getContent();
+                String userID = event.getAuthor().getId();
+                User user = ServerMain.getUser(userID);
 
 		if (event.getAuthor().isBot() & !event.getAuthor().getName().equals("ZBot")){
                     //do nothing
                 } else if (messageContent.startsWith("~!")) {
+                    if (event.getChannel() instanceof PrivateChannel){
+                        if (user != null){
+                            ServerMain.getUser(userID).setChannel((PrivateChannel)channel);
+                        }
+                    }
 			ServerMain.handleCommand(ServerMain.parser.parse(messageContent, event));
 		}
 		

@@ -1,6 +1,5 @@
 package commands;
 
-import mmoServer.Command;
 import mmoServer.ServerMain;
 import mmoServer.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

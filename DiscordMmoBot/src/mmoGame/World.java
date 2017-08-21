@@ -1,5 +1,5 @@
 package mmoGame;
 
-public class World {
+public class World  implements java.io.Serializable{
 
 }

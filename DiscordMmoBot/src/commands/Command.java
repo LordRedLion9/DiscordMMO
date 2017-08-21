@@ -1,4 +1,4 @@
-package mmoServer;
+package commands;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

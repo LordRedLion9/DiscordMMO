@@ -1,10 +1,12 @@
 package commands;
 
+import mmoServer.GameSaver;
 import mmoServer.ServerMain;
-import mmoServer.User;
+import mmoServer.main;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class AdminInfoCommand implements Command{
+
+public class StopServerCommand implements Command{
 
     @Override
     public boolean isCalled(String[] args, MessageReceivedEvent event) {
@@ -13,9 +15,7 @@ public class AdminInfoCommand implements Command{
 
     @Override
     public void doAction(String[] args, MessageReceivedEvent event) {
-        String message;
-        message = ServerMain.getGame().adminInfo();
-        ServerMain.botSay(message, event.getChannel());
+        main.stop();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class AdminInfoCommand implements Command{
 
     @Override
     public String help() {
-        return "Use to display info on the game.";
+        return "Stops shit";
     }
     
 }

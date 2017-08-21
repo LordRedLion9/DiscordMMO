@@ -1,13 +1,16 @@
 package mmoServer;
 
 import mmoGame.PlayerCharacter;
+import net.dv8tion.jda.core.entities.*;
 
-public class User {
+public class User implements java.io.Serializable{
 
     private String name;
     private String ID;
     private boolean loggedIn;
     private boolean admin;
+    private PrivateChannel channel;
+    
 
 
     PlayerCharacter playerChar = null;
@@ -58,6 +61,14 @@ public class User {
 
     public void setAdmin(boolean isAdmin) {
         this.admin = isAdmin;
+    }
+
+    public PrivateChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(PrivateChannel channel) {
+        this.channel = channel;
     }
 
 }

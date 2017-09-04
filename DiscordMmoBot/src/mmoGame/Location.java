@@ -9,7 +9,7 @@ public class Location implements java.io.Serializable{
     List<PlayerCharacter> Players = new ArrayList<>();
     List<NPC> NPCs = new ArrayList<>();
 
-    List<Location> Exits = new ArrayList<>(); // may change this to map
+    public List<Exit> Exits = new ArrayList<>(); // may change this to map
 
     List<Item> Items = new ArrayList<>();
 
@@ -33,11 +33,11 @@ public class Location implements java.io.Serializable{
 
     }
 
-    public void addChar(PlayerCharacter c) {
+    public void addPlayer(PlayerCharacter c) {
         Players.add(c);
     }
 
-    public void removeChar(PlayerCharacter c) {
+    public void removePlayer(PlayerCharacter c) {
         Players.remove(c);
     }
 
@@ -49,8 +49,60 @@ public class Location implements java.io.Serializable{
         NPCs.remove(npc);
     }
 
-    public void addExit(Location l) {
+    public void addExit(Exit l) {
         Exits.add(l);
+    }
+
+    public Exit getExit(String name){
+        for(Exit e : Exits){
+            if (e.equals(name)) {
+                return e;
+            }
+        }
+
+        System.out.println("Error, no exit in this location by that name");
+        return null;
+    }
+
+    public Exit getExit(String name, int i){
+
+        List<Exit> exts = new ArrayList<>();
+        for(Exit e : Exits){
+            if (e.equals(name)) {
+                exts.add(e);
+            }
+        }
+
+        if (exts.size() == 0){
+            System.out.println("Error, no exits in this location by that name (group mode)");
+            return null;
+        }
+
+        if (i >= exts.size()){
+            System.out.println("Error, no exits in that location by that name and index (group mode)");
+            return null;
+        }
+
+        return exts.get(i);
+
+
+    }
+
+    public List<PlayerCharacter> getAllPlayers() {
+        return Players;
+    }
+
+    public PlayerCharacter getPlayer(PlayerCharacter charac){
+        for (PlayerCharacter p : Players){
+            if(p.equals(charac)){
+                return p;
+            }
+
+        }
+
+        System.out.println("ERROR: That player is not in this location");
+        return null;
+
     }
 
     public void addItem(Item i) {

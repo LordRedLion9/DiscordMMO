@@ -27,6 +27,16 @@ public class GameMain implements Runnable {
                 "The blank white expanse of the testing zone stretches infinitely all around you."
         );
 
+        Location testGarden = new Location();
+        testGarden.setName("Testing Garden");
+        testGarden.setDesc(
+                "A nice white garden area, with nice white trees, plants and some nice white reclining chairs"
+        );
+
+        Exit e1 = new Exit(spawn, testGarden);
+        spawn.addExit(e1);
+        testGarden.addExit(e1);
+
         GameRunner runner = new GameRunner(this);
         Thread t = new Thread(runner);
         t.start();

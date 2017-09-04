@@ -57,6 +57,19 @@ public class NPC extends Character{
         }
     }
 
+    public void moveCharacter(String locName){
+
+        Exit exit = currentLocation.getExit(locName);
+        if (exit == null) {
+            System.out.println("Exit not available, move cancelled");
+            return;
+        }
+
+        Location newLoc = exit.getOtherLocation(currentLocation);
+        currentLocation.removeNPC(this);
+
+    }
+
     public String getNPCID() {
         return NPCID;
     }

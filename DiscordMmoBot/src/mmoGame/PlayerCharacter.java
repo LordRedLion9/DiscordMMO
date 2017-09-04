@@ -22,5 +22,19 @@ public class PlayerCharacter extends Character {
     public void setPlayerID(String playerID) {
         this.playerID = playerID;
     }
-	
+
+    public void moveCharacter(String locName){
+        Exit exit = currentLocation.getExit(locName);
+        if (exit == null) {
+            System.out.println("Exit not available, move cancelled");
+            return;
+        }
+
+        Location newLoc = exit.getOtherLocation(currentLocation);
+        currentLocation.removePlayer(this);
+        newLoc.addPlayer(this);
+        currentLocation = newLoc;
+
+    }
+
 }

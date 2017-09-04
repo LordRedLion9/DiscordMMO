@@ -23,17 +23,18 @@ public class PlayerCharacter extends Character {
         this.playerID = playerID;
     }
 
-    public void moveCharacter(String locName){
+    public boolean moveCharacter(String locName){
         Exit exit = currentLocation.getExit(locName);
         if (exit == null) {
             System.out.println("Exit not available, move cancelled");
-            return;
+            return false;
         }
 
         Location newLoc = exit.getOtherLocation(currentLocation);
         currentLocation.removePlayer(this);
         newLoc.addPlayer(this);
         currentLocation = newLoc;
+        return true;
 
     }
 

@@ -51,6 +51,7 @@ public class ServerMain implements java.io.Serializable{
         commands.put("spawnnpc", new SpawnNPCCommand());
         
         commands.put("stop", new StopServerCommand());
+        commands.put("move", new MoveCommand());
 
         startGame();
 

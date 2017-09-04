@@ -34,6 +34,7 @@ public class GameMain implements Runnable {
         );
 
         Exit e1 = new Exit(spawn, testGarden);
+        e1.setExitName("gate");
         spawn.addExit(e1);
         testGarden.addExit(e1);
 
@@ -71,7 +72,7 @@ public class GameMain implements Runnable {
         user.setChar(newChar);
 
         newChar.setLocation(spawn);
-        spawn.addChar(newChar);
+        spawn.addPlayer(newChar);
 
     }
 

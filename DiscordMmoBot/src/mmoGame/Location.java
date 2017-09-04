@@ -49,13 +49,16 @@ public class Location implements java.io.Serializable{
         NPCs.remove(npc);
     }
 
+
     public void addExit(Exit l) {
         Exits.add(l);
     }
 
     public Exit getExit(String name){
+        System.out.println("Checking for exit: " + name);
         for(Exit e : Exits){
-            if (e.equals(name)) {
+            if (e.getExitName().equals(name)) {
+                System.out.println("Found exit: " + e.getExitName());
                 return e;
             }
         }
@@ -64,11 +67,12 @@ public class Location implements java.io.Serializable{
         return null;
     }
 
+
     public Exit getExit(String name, int i){
 
         List<Exit> exts = new ArrayList<>();
         for(Exit e : Exits){
-            if (e.equals(name)) {
+            if (e.getExitName().equals(name)) {
                 exts.add(e);
             }
         }

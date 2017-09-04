@@ -35,10 +35,6 @@ public class User implements java.io.Serializable{
         return playerChar;
     }
 
-    public PlayerCharacter getPlayerChar() {
-        return playerChar;
-    }
-
     public void setLoginStatus(boolean loginStatus) {
         loggedIn = loginStatus;
     }

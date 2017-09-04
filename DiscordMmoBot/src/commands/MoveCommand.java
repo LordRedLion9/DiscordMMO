@@ -1,6 +1,8 @@
 package commands;
 
+import mmoGame.PlayerCharacter;
 import mmoServer.ServerMain;
+import mmoServer.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class MoveCommand implements Command {
@@ -16,6 +18,13 @@ public class MoveCommand implements Command {
 
     @Override
     public void doAction(String[] args, MessageReceivedEvent event) {
+
+        String ID = event.getAuthor().getId();
+        PlayerCharacter charac = ServerMain.getUser(ID).getChar();
+
+        if(charac.moveCharacter(args[0]) == false){
+            ServerMain.botSay("Invalid move. See console for details", event.getChannel());
+        }
 
     }
 

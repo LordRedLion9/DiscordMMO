@@ -145,7 +145,18 @@ public class Location implements java.io.Serializable{
         String message = "```md\n";
 
         message += "########## Looking around ###########\n";
-        message += this.description + "\n";
+        message += this.description + "\n \n";
+
+        if (!Exits.isEmpty()){
+
+            message += "Exits available: \n";
+            for (Exit e : Exits){
+                message += e.getExitName() + "\n";
+            }
+
+            message += "\n";
+
+        }
 
         if (!Items.isEmpty()) {
 

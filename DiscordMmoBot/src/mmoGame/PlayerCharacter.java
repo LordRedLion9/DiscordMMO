@@ -34,7 +34,7 @@ public class PlayerCharacter extends Character {
             return false;
         }
 
-        currentLocation.saytoLocation(getName() + " walks off towards the " + exit.getExitName());
+        currentLocation.saytoLocation("```md\n" + getName() + " walks off towards the " + exit.getExitName() + "```");
 
         Location newLoc = exit.getOtherLocation(currentLocation);
         currentLocation.removePlayer(this);

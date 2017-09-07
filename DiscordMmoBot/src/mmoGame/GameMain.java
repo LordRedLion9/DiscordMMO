@@ -68,11 +68,14 @@ public class GameMain implements Runnable {
         System.out.println("Creating new Character");
         System.out.println("User: " + user.getName());
         System.out.println("Sex: " + sex);
-        PlayerCharacter newChar = new PlayerCharacter(user.getName(), sex);
+        PlayerCharacter newChar = new PlayerCharacter(user.getName(), sex, user);
         user.setChar(newChar);
 
         newChar.setLocation(spawn);
         spawn.addPlayer(newChar);
+
+        spawn.saytoLocation("With a pillar of blinding white light, a new character is warped into this world.");
+        spawn.saytoLocation(newChar.getName() + " steps out of the universal rift, blinking from the light.");
 
     }
 

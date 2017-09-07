@@ -1,15 +1,18 @@
 package commands;
 
-import mmoGame.PlayerCharacter;
+import com.sun.security.ntlm.Server;
 import mmoServer.ServerMain;
 import mmoServer.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class MoveCommand implements Command {
+public class MessageMeCommand implements Command {
     @Override
     public boolean isCalled(String[] args, MessageReceivedEvent event) {
-        if (args.length != 1){
-            ServerMain.botSay("You did not specify an exit", event.getChannel());
+
+        User user = ServerMain.getUser(event.getAuthor().getId());
+
+        if (user.getChannel() == null){
+            ServerMain.botSay("You do not have a private channel set with me", event.getChannel());
             return false;
         }
 
@@ -18,20 +21,13 @@ public class MoveCommand implements Command {
 
     @Override
     public void doAction(String[] args, MessageReceivedEvent event) {
-
-        String ID = event.getAuthor().getId();
-        PlayerCharacter charac = ServerMain.getUser(ID).getChar();
-
-        if(charac.moveCharacter(args[0]) == false){ //move character
-            ServerMain.botSay("Invalid move. See console for details", event.getChannel());
-        }
-
+        User user = ServerMain.getUser(event.getAuthor().getId());
+        System.out.println("SENDING PRIVATE MESSAGE");
+        ServerMain.botTell("Hello there!", user);
     }
 
     @Override
     public void endCommand(boolean success, MessageReceivedEvent event) {
-
-
 
     }
 

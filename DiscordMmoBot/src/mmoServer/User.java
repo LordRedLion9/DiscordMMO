@@ -10,15 +10,18 @@ public class User implements java.io.Serializable{
     private boolean loggedIn;
     private boolean admin;
     private PrivateChannel channel;
+
     
 
 
     PlayerCharacter playerChar = null;
 
-    public User(String name, String ID) {
+    public User(String name, String ID, PrivateChannel channel) {
+
 
         this.name = name;
         this.ID = ID;
+        this.channel = channel;
         for (String s : Constants.Admins) {
             if (s.equals(ID)) {
                 this.admin = true;

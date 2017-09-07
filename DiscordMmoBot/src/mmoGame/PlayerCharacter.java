@@ -1,14 +1,16 @@
 package mmoGame;
 
 import mmoServer.ServerMain;
+import mmoServer.User;
 
 public class PlayerCharacter extends Character {
     
     private String playerID;
+    private User owningUser;
 
-    public PlayerCharacter(String name, String sex){
+    public PlayerCharacter(String name, String sex, User user){
         super(name, sex);
-        
+        owningUser = user;
         setPlayerID("P" + (ServerMain.getGame().Players.size() + 1));
         ServerMain.getGame().Players.add(this);
         
@@ -23,6 +25,8 @@ public class PlayerCharacter extends Character {
         this.playerID = playerID;
     }
 
+    public User getOwningUser() { return owningUser; }
+
     public boolean moveCharacter(String locName){
         Exit exit = currentLocation.getExit(locName);
         if (exit == null) {
@@ -30,10 +34,13 @@ public class PlayerCharacter extends Character {
             return false;
         }
 
+        currentLocation.saytoLocation(getName() + "walks off towards the " + exit.getExitName());
+
         Location newLoc = exit.getOtherLocation(currentLocation);
         currentLocation.removePlayer(this);
         newLoc.addPlayer(this);
         currentLocation = newLoc;
+
         return true;
 
     }

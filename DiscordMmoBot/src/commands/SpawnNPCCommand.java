@@ -38,8 +38,7 @@ public class SpawnNPCCommand implements Command {
         System.out.println("Spawning " + npcName);
 
         ServerMain.getGame().spawnNPC(newNpc, playerC.getLocation());
-        ServerMain.botSay(playerC.getName() + " opens a wormhole and "
-                + npcName + " falls through onto the ground", event.getChannel());
+        playerC.getLocation().saytoLocation(playerC.getName() + " opens a wormhole and " + npcName + " falls through onto the ground. The wormhole then closes.");
 
     }
 

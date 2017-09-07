@@ -53,6 +53,8 @@ public class ServerMain implements java.io.Serializable{
         commands.put("stop", new StopServerCommand());
         commands.put("move", new MoveCommand());
 
+        commands.put("msgMe", new MessageMeCommand());
+
         startGame();
 
     }
@@ -70,9 +72,9 @@ public class ServerMain implements java.io.Serializable{
         return game;
     }
 
-    public static void registerUser(String ID, String name) {
+    public static void registerUser(String ID, String name, PrivateChannel channel) {
 
-        User newUser = new User(name, ID);
+        User newUser = new User(name, ID, channel);
 
         registeredUsers.put(ID, newUser);
 

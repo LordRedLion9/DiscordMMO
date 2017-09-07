@@ -4,6 +4,7 @@ import java.util.*;
 
 import mmoServer.ServerMain;
 import mmoGame.Item;
+import mmoServer.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class LookCommand implements Command {
@@ -30,8 +31,9 @@ public class LookCommand implements Command {
     public void doAction(String[] args, MessageReceivedEvent event) {
         
         String userID = event.getAuthor().getId();
+        User user = ServerMain.getUser(userID);
 
-        ServerMain.botSay(ServerMain.getUser(userID).getChar().getLocation().getInfo(), event.getChannel()); //maybe too coupled?
+        ServerMain.botTell(user.getChar().getLocation().getInfo(), user); //maybe too coupled?
 
     }
 

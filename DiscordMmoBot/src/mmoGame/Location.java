@@ -141,6 +141,14 @@ public class Location implements java.io.Serializable{
         this.name = name;
     }
 
+    public void saytoLocation(String msg){
+
+        for (PlayerCharacter player : Players){
+            ServerMain.botTell(msg, player.getOwningUser());
+        }
+
+    }
+
     public String getInfo() { //TODO: Eventually refactor the shite out of this. Maybe. Dunno if I can be bothered.
         String message = "```md\n";
 

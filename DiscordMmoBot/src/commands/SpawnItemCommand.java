@@ -5,6 +5,7 @@ import mmoGame.Weapon;
 import mmoServer.ServerMain;
 import mmoGame.Item;
 import mmoGame.PlayerCharacter;
+import mmoServer.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class SpawnItemCommand implements Command {
@@ -31,10 +32,12 @@ public class SpawnItemCommand implements Command {
     @Override
     public void doAction(String[] args, MessageReceivedEvent event) {
 
-
         String userID = event.getAuthor().getId();
-        PlayerCharacter playerC = ServerMain.getUser(userID).getChar(); //This is lazy (it's exactly how I did mine)
+        User user = ServerMain.getUser(userID);
+
+        PlayerCharacter playerC = user.getChar(); //This is lazy (it's exactly how I did mine)
         String pronoun = (playerC.getSex().equals("male")) ? "his" : "her";
+
         String message = "";
 
         Item newItem = null;
@@ -84,7 +87,8 @@ public class SpawnItemCommand implements Command {
             }
             message += newItem.getItemName() + " appears.";
 
-            ServerMain.botSay(message, event.getChannel());
+            playerC.getLocation().saytoLocation(message);
+
             newItem.setLocation(playerC.getLocation());
             playerC.getLocation().addItem(newItem);
         }

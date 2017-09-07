@@ -51,7 +51,9 @@ public class LoginCommand implements Command{
 
 	@Override
 	public String help() {
-		return "Use to log into the game server";
+		return "LOGIN COMMAND \n" +
+				"Usage ~!login \n" +
+				"Use to log into the game server";
 	}
 
 }

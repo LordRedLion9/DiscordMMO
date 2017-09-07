@@ -21,7 +21,7 @@ public class ServerMain implements java.io.Serializable{
     static GameSaver saver;
 
     public static CommandParser parser = new CommandParser(); //The command processing object
-    private static HashMap<String, Command> commands = new HashMap<>(); //A map of user command strings to relevant command objects <Typed Command, Command>
+    public static HashMap<String, Command> commands = new HashMap<>(); //A map of user command strings to relevant command objects <Typed Command, Command>
 
     private static HashMap<String, User> registeredUsers = new HashMap<>(); //Registered Users. <User Discord ID Number, User profile object>
     transient private static HashMap<String, User> loggedInUsers = new HashMap<>(); //Map of users currently logged in. <User Discord ID Number, User profile object>
@@ -38,6 +38,9 @@ public class ServerMain implements java.io.Serializable{
 
         setupJDA();
 
+        //set up commands
+        commands.put("help", new HelpCommand());
+
         commands.put("register", new RegisterCommand());
         commands.put("login", new LoginCommand());
         commands.put("logout", new LogoutCommand());
@@ -46,12 +49,14 @@ public class ServerMain implements java.io.Serializable{
         commands.put("look", new LookCommand());
         commands.put("inspect", new InspectCommand());
         commands.put("spawn", new SpawnItemCommand());
+        commands.put("move", new MoveCommand());
+        commands.put("say", new SayCommand());
 
         commands.put("admininfo", new AdminInfoCommand());
         commands.put("spawnnpc", new SpawnNPCCommand());
         
-        commands.put("stop", new StopServerCommand());
-        commands.put("move", new MoveCommand());
+        //commands.put("stop", new StopServerCommand());
+
 
         commands.put("msgMe", new MessageMeCommand());
 

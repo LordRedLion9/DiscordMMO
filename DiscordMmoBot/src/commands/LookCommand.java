@@ -44,6 +44,8 @@ public class LookCommand implements Command {
 
     @Override
     public String help() {
-        return null;
+        return "LOOK ACTION \n" +
+                "Usage ~!look \n" +
+                "Get a description of your surroundings. Have a good look around, see whats about!";
     }
 }

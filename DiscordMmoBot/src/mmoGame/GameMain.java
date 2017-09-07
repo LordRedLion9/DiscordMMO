@@ -74,8 +74,8 @@ public class GameMain implements Runnable {
         newChar.setLocation(spawn);
         spawn.addPlayer(newChar);
 
-        spawn.saytoLocation("```md\n With a pillar of blinding white light, a new character is warped into this world.```");
-        spawn.saytoLocation("```md\n" + newChar.getName() + " steps out of the universal rift, blinking from the light.```");
+        spawn.saytoLocation("With a pillar of blinding white light, a new character is warped into this world.");
+        spawn.saytoLocation(newChar.getName() + " steps out of the universal rift, blinking from the light.");
 
     }
 

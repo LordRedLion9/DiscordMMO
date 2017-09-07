@@ -32,6 +32,8 @@ public class InspectCommand implements Command{
     
     @Override
     public String help(){
-        return "Use to inspect an item or character";
+        return "INSPECT COMMAND:\n" +
+                "Usage - ~!inspect \"item\" | \"character\" \n" +
+                "Use to inspect an item or character";
     }
 }

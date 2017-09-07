@@ -37,6 +37,8 @@ public class MoveCommand implements Command {
 
     @Override
     public String help() {
-        return null;
+        return "MOVE COMMAND: \n" +
+                "Usage - ~!move \"exit_name\" \n" +
+                "Go to another location via the given exit.";
     }
 }

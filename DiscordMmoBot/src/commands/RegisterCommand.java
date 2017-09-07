@@ -49,7 +49,9 @@ public class RegisterCommand implements Command {
 	@Override
 	public String help() {
 		// TODO Fill in help for Register command
-		return null;
+		return "REGISTER COMMAND \n" +
+                "Usage - ~!register \n" +
+                "Register an account with me, so I may better serve you (and so you can join the world)";
 	}
 
 }

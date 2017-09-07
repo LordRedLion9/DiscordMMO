@@ -40,7 +40,9 @@ public class CreateCharacterCommand implements Command{
 
     @Override
     public String help() {
-        return "Use to create a new character.";
+        return "CREATE CHARACTER COMMAND: \n" +
+                "Usage - ~!createchar \"gender\" \n" +
+                "Use to create a new character. Character will be of the given gender (No helicopters allowed)";
     }
     
 }

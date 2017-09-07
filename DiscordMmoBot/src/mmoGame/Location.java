@@ -143,14 +143,16 @@ public class Location implements java.io.Serializable{
 
     public void saytoLocation(String msg){
 
+        String message = "```md\n" + msg + "```";
+
         for (PlayerCharacter player : Players){
-            ServerMain.botTell(msg, player.getOwningUser());
+            ServerMain.botTell(message, player.getOwningUser());
         }
 
     }
 
     public String getInfo() { //TODO: Eventually refactor the shite out of this. Maybe. Dunno if I can be bothered.
-        String message = "```md\n";
+        String message = "";
 
         message += "########## Looking around ###########\n";
         message += this.description + "\n \n";
@@ -225,7 +227,6 @@ public class Location implements java.io.Serializable{
             message += " is standing here.";
         }
 
-        message += "```";
         return message;
     }
 }

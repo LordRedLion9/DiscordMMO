@@ -8,6 +8,8 @@ public class PlayerCharacter extends Character {
     private String playerID;
     private User owningUser;
 
+    public boolean isMuted = false;
+
     public PlayerCharacter(String name, String sex, User user){
         super(name, sex);
         owningUser = user;

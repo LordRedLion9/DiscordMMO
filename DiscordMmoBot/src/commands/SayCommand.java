@@ -9,6 +9,11 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 public class SayCommand implements Command {
     @Override
     public boolean isCalled(String[] args, MessageReceivedEvent event) {
+
+        User user = ServerMain.getUser(event.getAuthor().getId());
+
+        if (user.getChar().isMuted){return false;}
+
         return true;
     }
 
@@ -17,6 +22,7 @@ public class SayCommand implements Command {
 
         User user = ServerMain.getUser(event.getAuthor().getId());
         PlayerCharacter charac = user.getChar();
+
 
         if (args.length == 0){
             charac.getLocation().saytoLocation(charac.getName()+ " opens their mouth to speak, but no words come out");

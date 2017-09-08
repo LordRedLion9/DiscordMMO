@@ -60,6 +60,7 @@ public class NPC extends Character {
 
         for (NPCReactBehaviour r : reactions) {
             if (r.checkActivate(msg)){
+                System.out.println("NPC is REACTING!");
                 r.activate(msg);
             }
         }

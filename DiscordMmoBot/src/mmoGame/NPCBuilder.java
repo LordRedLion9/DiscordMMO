@@ -34,7 +34,7 @@ public class NPCBuilder {
                     public boolean checkActivate() {
 
                         int timerLimit = 15;
-                        
+
                         if (timer++ == timerLimit) {
                             timer = 0;
                             return true;
@@ -61,7 +61,7 @@ public class NPCBuilder {
 
 
                     public boolean checkActivate(String msg) {
-                        return false;
+                        return true;
                     }
 
 

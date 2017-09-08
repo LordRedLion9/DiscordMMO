@@ -22,7 +22,7 @@ public abstract class Character implements Inspectable, java.io.Serializable {
 
     Location currentLocation;
 
-    private List<String> inventory = new ArrayList<>(); //String list only temp, will make item objects later
+    private List<Item> inventory = new ArrayList<>();
 
     public Character(String name, String sex) {
 

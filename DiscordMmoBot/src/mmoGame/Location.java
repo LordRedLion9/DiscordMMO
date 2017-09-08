@@ -6,8 +6,8 @@ import mmoServer.ServerMain;
 
 public class Location implements java.io.Serializable{
 
-    List<PlayerCharacter> Players = new ArrayList<>();
-    List<NPC> NPCs = new ArrayList<>();
+    public List<PlayerCharacter> Players = new ArrayList<>();
+    public List<NPC> NPCs = new ArrayList<>();
 
     public List<Exit> Exits = new ArrayList<>(); // may change this to map
 
@@ -43,6 +43,7 @@ public class Location implements java.io.Serializable{
 
     public void addNPC(NPC npc) {
         NPCs.add(npc);
+        npc.setLocation(this);
     }
 
     public void removeNPC(NPC npc) {
@@ -146,7 +147,7 @@ public class Location implements java.io.Serializable{
         String message = "```md\n" + msg + "```";
 
         for (PlayerCharacter player : Players){
-            ServerMain.botTell(message, player.getOwningUser());
+            player.sayTo(message);
         }
 
     }

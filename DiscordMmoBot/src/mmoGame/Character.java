@@ -117,5 +117,7 @@ public abstract class Character implements Inspectable, java.io.Serializable {
 
     public abstract boolean moveCharacter(String locName);
 
+    public abstract void sayTo(String msg);
+
 
 }

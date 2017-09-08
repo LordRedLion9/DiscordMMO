@@ -1,5 +1,6 @@
 package commands;
 
+import mmoGame.NPC;
 import mmoGame.PlayerCharacter;
 import mmoServer.ServerMain;
 import mmoServer.User;
@@ -19,9 +20,24 @@ public class SayCommand implements Command {
 
         if (args.length == 0){
             charac.getLocation().saytoLocation(charac.getName()+ " opens their mouth to speak, but no words come out");
+        }else if (args.length == 1){
+            charac.getLocation().saytoLocation(charac.getName()+ " says: " + args[0]);
         }else{
 
-            charac.getLocation().saytoLocation(charac.getName()+ " says: " + args[0]);
+            for (NPC p : charac.getLocation().NPCs){
+                if (p.getName().equals(args[0])){
+                    p.sayTo(args[1]);
+                    charac.getLocation().saytoLocation(charac.getName() + " says to " + p.getName()+ ": " + args[1]);
+                    return;
+                }
+            }
+
+            for (PlayerCharacter p : charac.getLocation().Players){
+                if (p.getName().equals(args[0])){
+                    p.sayTo(charac.getName() + " says to you: " + args[1]);
+                    return;
+                }
+            }
 
         }
 

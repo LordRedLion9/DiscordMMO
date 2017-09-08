@@ -16,6 +16,7 @@ public class GameMain implements Runnable {
 
     Location spawn;
 
+    NPCBuilder npcbuilder = new NPCBuilder();
 
     public void run() {
 
@@ -32,6 +33,8 @@ public class GameMain implements Runnable {
         testGarden.setDesc(
                 "A nice white garden area, with nice white trees, plants and some nice white reclining chairs"
         );
+
+        spawnNPC(npcbuilder.buildNPC(NPCBuilder.NPCType.GENERIC, "Dave the Old Man", "male"), testGarden);
 
         Exit e1 = new Exit(spawn, testGarden);
         e1.setExitName("gate");

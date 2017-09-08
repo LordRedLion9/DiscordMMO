@@ -15,8 +15,8 @@ public class PlayerCharacter extends Character {
         ServerMain.getGame().Players.add(this);
         
         this.setExp(15);//currently unused
-        
     }
+    
 
     public String getPlayerID() {
         return playerID;
@@ -34,15 +34,21 @@ public class PlayerCharacter extends Character {
             return false;
         }
 
-        currentLocation.saytoLocation("```md\n" + getName() + " walks off towards the " + exit.getExitName() + "```");
+        currentLocation.saytoLocation(getName() + " walks off towards the " + exit.getExitName());
 
         Location newLoc = exit.getOtherLocation(currentLocation);
         currentLocation.removePlayer(this);
         newLoc.addPlayer(this);
         currentLocation = newLoc;
+        currentLocation.saytoLocation(getName() + " comes in from the " + exit.getExitName());
 
         return true;
 
+    }
+
+    @Override
+    public void sayTo(String msg) {
+        ServerMain.botTell(msg, owningUser);
     }
 
 }

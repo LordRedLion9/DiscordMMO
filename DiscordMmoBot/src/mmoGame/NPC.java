@@ -6,14 +6,14 @@
 package mmoGame;
 
 import mmoServer.ServerMain;
+
 import java.util.*;
 
 /**
- *
  * @author PC
  */
-public class NPC extends Character{
-    
+public class NPC extends Character {
+
     private String NPCID;
     private static int ID = 0; //Thought having an incrementing ID number would be a bit better.
 
@@ -22,42 +22,25 @@ public class NPC extends Character{
 
     //Might have separate lists for behaviours that rely on time, and ones that don't (such as behaviours triggered by a player?)
     List<NPCBehaviour> behaviours = new ArrayList<>();
+    List<NPCReactBehaviour> reactions = new ArrayList<>();
 
     public NPC(String name, String sex) {
         super(name, sex);
         NPCID = name + (++ID);
         GameMain.NPCs.add(this);
 
-        behaviours.add(new NPCBehaviour() { //add generic behaviour for testing
-            int timer = 0;
-
-            @Override
-            public boolean checkActivate() {
-
-                if (timer++ == 10){
-                    timer = 0;
-                    return true;
-                }
-                return false;
-            }
-
-            @Override
-            public void activate() {
-                System.out.println(getNPCID() + " activated their generic behaviour");
-            }
-        });
 
     }
 
-    void update(){
-        for (NPCBehaviour b : behaviours){
-           if (b.checkActivate()){
-               b.activate();
-           }
+    void update() {
+        for (NPCBehaviour b : behaviours) {
+            if (b.checkActivate()) {
+                b.activate();
+            }
         }
     }
 
-    public boolean moveCharacter(String locName){
+    public boolean moveCharacter(String locName) {
 
         Exit exit = currentLocation.getExit(locName);
         if (exit == null) {
@@ -70,6 +53,17 @@ public class NPC extends Character{
         newLoc.addNPC(this);
         currentLocation = newLoc;
         return true;
+    }
+
+    @Override
+    public void sayTo(String msg) {
+
+        for (NPCReactBehaviour r : reactions) {
+            if (r.checkActivate(msg)){
+                r.activate(msg);
+            }
+        }
+
     }
 
     public String getNPCID() {
@@ -102,11 +96,21 @@ public class NPC extends Character{
         }
     };*/
 
-    interface NPCBehaviour{
 
-        boolean checkActivate();
-        void activate();
 
-    }
+
+
+}
+
+interface NPCBehaviour {
+    boolean checkActivate();
+    void activate();
+
+}
+
+interface NPCReactBehaviour {
+
+    boolean checkActivate(String msg);
+    void activate(String msg);
 
 }

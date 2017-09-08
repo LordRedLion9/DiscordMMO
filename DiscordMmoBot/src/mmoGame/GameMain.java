@@ -86,9 +86,12 @@ public class GameMain implements Runnable {
         l.addItem(i);
     }
 
-    private Inspectable getInspectable(Location loc, String input) {
+    private Inspectable getInspectable(User user, String input) {
         Inspectable result = null;
         String name = input.toLowerCase().trim();
+
+        Location loc = user.getChar().currentLocation;
+
         for (PlayerCharacter pc : loc.Players) {
             if (pc.getName().toLowerCase().trim().equals(name)) {
                 result = pc;
@@ -104,6 +107,12 @@ public class GameMain implements Runnable {
                 result = item;
             }
         }
+        for (Item item : user.getChar().inventory) {
+            if (item.getItemName().toLowerCase().trim().equals(name)) {
+                result = item;
+            }
+        }
+
         return result;
     }
 
@@ -113,8 +122,8 @@ public class GameMain implements Runnable {
     }
 
     public String inspect(String playerID, String target) {
-        PlayerCharacter c = ServerMain.getUser(playerID).getChar();
-        Inspectable i = getInspectable(c.getLocation(), target);
+        User user = ServerMain.getUser(playerID);
+        Inspectable i = getInspectable(user, target);
         if (i != null) {
             return i.getInfo();
         } else {

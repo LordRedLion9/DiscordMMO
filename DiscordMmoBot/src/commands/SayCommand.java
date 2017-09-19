@@ -38,9 +38,9 @@ public class SayCommand implements Command {
                 }
             }
 
-            for (PlayerCharacter p : charac.getLocation().Players){
+            for (PlayerCharacter p : charac.getLocation().Players){ //private message
                 if (p.getName().equals(args[0])){
-                    p.sayTo(charac.getName() + " says to you: " + args[1]);
+                    user.sendPrivateMsg(charac.getName() + " says to you: " + args[1]);
                     return;
                 }
             }

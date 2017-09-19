@@ -2,6 +2,7 @@ package mmoServer;
 
 import mmoGame.PlayerCharacter;
 import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.requests.restaction.pagination.MessagePaginationAction;
 
 public class User implements java.io.Serializable{
 
@@ -9,8 +10,11 @@ public class User implements java.io.Serializable{
     private String ID;
     private boolean loggedIn;
     private boolean admin;
-    private PrivateChannel channel;
 
+    private PrivateChannel privateChannel;
+    private MessageChannel publicChannel;
+
+    public boolean messageToPublic = false;
     
 
 
@@ -21,7 +25,7 @@ public class User implements java.io.Serializable{
 
         this.name = name;
         this.ID = ID;
-        this.channel = channel;
+        this.privateChannel = channel;
         for (String s : Constants.Admins) {
             if (s.equals(ID)) {
                 this.admin = true;
@@ -62,12 +66,34 @@ public class User implements java.io.Serializable{
         this.admin = isAdmin;
     }
 
-    public PrivateChannel getChannel() {
-        return channel;
+    public MessageChannel getPublicChannel() {
+        return publicChannel;
     }
 
-    public void setChannel(PrivateChannel channel) {
-        this.channel = channel;
+    public PrivateChannel getPrivateChannel() {
+        return privateChannel;
+    }
+
+    public void setPrivateChannel(PrivateChannel channel) {
+        this.privateChannel = channel;
+    }
+
+    public void setPublicChannel(MessageChannel channel) {
+        this.publicChannel = channel;
+    }
+
+    public void sendMsg(String msg) { //say to whatever channel is selected
+
+        if (messageToPublic){
+            ServerMain.botSay(msg, getPublicChannel());
+        }else{
+            ServerMain.botTell(msg, this);
+        }
+
+    }
+
+    public void sendPrivateMsg(String msg) { //send specifically to private messaging
+        ServerMain.botTell(msg, this);
     }
 
 }

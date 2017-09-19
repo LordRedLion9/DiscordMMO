@@ -57,7 +57,7 @@ public class ServerMain implements java.io.Serializable{
         
         //commands.put("stop", new StopServerCommand());
 
-
+        commands.put("setChannel", new SetChannelCommand());
         commands.put("msgMe", new MessageMeCommand());
 
         startGame();
@@ -200,7 +200,7 @@ public class ServerMain implements java.io.Serializable{
 
 
     public static void botTell(String msg, User user) {
-        user.getChannel().sendMessage(msg).queue();
+        user.getPrivateChannel().sendMessage(msg).queue();
     }
 
     public static void botSay(String msg, MessageChannel channel) {

@@ -50,7 +50,9 @@ public class PlayerCharacter extends Character {
 
     @Override
     public void sayTo(String msg) {
-        ServerMain.botTell(msg, owningUser);
+
+        owningUser.sendMsg(msg);
+
     }
 
 }

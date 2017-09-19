@@ -33,7 +33,7 @@ public class LookCommand implements Command {
         String userID = event.getAuthor().getId();
         User user = ServerMain.getUser(userID);
 
-        ServerMain.botTell("```md\n" + user.getChar().getLocation().getInfo() + "```", user); //maybe too coupled?
+        user.sendMsg("```md\n" + user.getChar().getLocation().getInfo() + "```"); //maybe too coupled?
 
     }
 
